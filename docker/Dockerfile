@@ -25,11 +25,14 @@ RUN apt-get install -y \
     python3.12-venv \
     python3-pip
 
-RUN EXPORT CXX=clang++-18            # or g++-13
-RUN EXPORT CC=clang-18               # gcc-13
-RUN EXPORT CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
-RUN EXPORT LLVM_COV=llvm-cov-18
-RUN EXPORT CLANG_TIDY=clang-tidy-18  # only if you want to use one of the clang-tidy presets
+ENV CMAKE_PREFIX_PATH /home/linuxbrew/.linuxbrew
+# or g++-13
+ENV CXX clang++-18
+# gcc-13
+ENV CC clang-18
+# only if you want to use one of the clang-tidy presets
+ENV LLVM_COV llvm-cov-18
+ENV CLANG_TIDY clang-tidy-18
 
 # Enable brew
 RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
