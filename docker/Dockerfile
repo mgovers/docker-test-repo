@@ -7,41 +7,12 @@ FROM homebrew/brew:latest AS pgm_base
 # RUN export NONINTERACTIVE=1
 # RUN ["/bin/bash '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)'"]
 
-# Install C++ dependencies
-RUN brew install boost eigen nlohmann-json msgpack-cxx doctest
-
-# Install packages
-USER root
-
-RUN apt-get update
-RUN apt-get install -y \
-    wget \
-    curl \
-    zip \
-    unzip \
-    tar \
+RUN brew install \
     git \
-    build-essential \
-    gcovr \
-    lcov \
-    gcc-12 \
-    g++-12 \
-    # clang-18 \
-    make \
-    cmake \
-    gdb \
-    ninja-build \
-    pkg-config \
-    python3.11 \
-    python3.11-dev \
-    python3.11-venv \
-    python3-pip
+    boost eigen nlohmann-json msgpack-cxx doctest \
+    cmake gcc ninja pkg-config \
+    gdb python@3.13
 
 ENV CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
 ENV CXX=g++-12
 ENV CC=gcc-12
-# ENV CXX=clang++-18
-# ENV CC=clang-18
-# # only if you want to use one of the clang-tidy presets
-# ENV LLVM_COV=llvm-cov-18
-# ENV CLANG_TIDY=clang-tidy-18
