@@ -10,9 +10,9 @@ FROM homebrew/brew:latest AS pgm_base
 RUN brew install \
     git \
     boost eigen nlohmann-json msgpack-cxx doctest \
-    cmake gcc ninja pkg-config \
+    cmake gcc@14 ninja pkg-config \
     gdb python@3.13
 
 ENV CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
-ENV CXX=g++-12
-ENV CC=gcc-12
+ENV CXX=g++-14
+ENV CC=gcc-14
