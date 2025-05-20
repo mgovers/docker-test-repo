@@ -37,8 +37,6 @@ RUN apt-get install -y \
     python3.11-venv \
     python3-pip
 
-USER 1001
-
 ENV CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
 ENV CXX=g++-13
 ENV CC=gcc-13
