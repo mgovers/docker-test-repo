@@ -24,16 +24,6 @@ jobs:
       - name: list images
         run: docker image ls
 
-  #     - name: save container
-  #       run: |
-  #         docker save mgovers-docker-test | gzip > mgovers-docker-test.tar.gz
-
-  #     - name: Keep wheel files
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: mgovers-docker-test
-  #         path: mgovers-docker-test.tar.gz
-
   # test:
   #   runs-on: ubuntu-latest
   #   steps:
@@ -46,7 +36,17 @@ jobs:
   #         commit: eb0e7f4
   #         path: .
 
-      - name: run tests
+  #     - name: run tests
+  #       run: |
+  #         docker run --name mgovers-runtime -d -i -t mgovers-docker-test
+  #         docker exec mgovers-runtime sh -c "git clone https://github.com/PowerGridModel/power-grid-model.git && cd power-grid-model && git status && sh ./build.sh -p gcc-debug -e -i -t"
+
+      - name: save container
         run: |
-          docker run --name mgovers-runtime -d -i -t mgovers-docker-test
-          docker exec mgovers-runtime sh -c "gcc --version && which gcc && git clone https://github.com/PowerGridModel/power-grid-model.git && cd power-grid-model && git status && sh ./build.sh -p gcc-debug -e -i -t"
+          docker save mgovers-docker-test | gzip > mgovers-docker-test.tar.gz
+
+      - name: Keep wheel files
+        uses: actions/upload-artifact@v4
+        with:
+          name: mgovers-docker-test
+          path: mgovers-docker-test.tar.gz
