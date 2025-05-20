@@ -14,5 +14,5 @@ RUN brew install \
     gdb python@3.13
 
 ENV CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
-ENV CXX=g++-14
-ENV CC=gcc-14
+ENV CXX=/home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/g++-14
+ENV CC=/home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/gcc-14
