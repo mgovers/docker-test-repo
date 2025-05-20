@@ -22,5 +22,3 @@ RUN $CC --version
 
 RUN ln -sf /home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/g++-14 g++
 RUN ln -sf /home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/gcc-14 gcc
-
-CMD ["CXX=/home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/g++-14", "CC=/home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/gcc-14", "sh"]
