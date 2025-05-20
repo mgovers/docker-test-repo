@@ -49,6 +49,5 @@ jobs:
       - name: run tests
         run: |
           docker run --name mgovers-runtime -d -i -t mgovers-docker-test
-          docker exec mgovers-runtime git clone https://github.com/PowerGridModel/power-grid-model.git
-          docker exec mgovers-runtime "cd power-grid-model && git status && sh ./build.sh -p gcc_debug -e -i -t || exit 1"
+          docker exec mgovers-runtime "git clone https://github.com/PowerGridModel/power-grid-model.git && cd power-grid-model && git status && sh ./build.sh -p gcc_debug -e -i -t"
 
