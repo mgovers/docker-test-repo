@@ -15,7 +15,12 @@ jobs:
 
       - name: build
         run: docker build . --file docker/Dockerfile --tag mgovers-docker-test:0.0.1
-      
+
+      - name: set latest tag
+        run: |
+          docker tag mgovers-docker-test:0.0.1 mgovers-docker-test:latest
+          docker tag mgovers-docker-test:0.0.1 mgovers-docker-test:$(date +%Y%m%d%H%M%S)
+
   # test:
   #   runs-on: ubuntu-latest
   #   steps:
