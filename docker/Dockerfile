@@ -39,7 +39,7 @@ RUN apt-get update && apt-get install -y curl
 
 # Enable brew
 RUN export NONINTERACTIVE=1
-RUN '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+RUN /bin/bash -c '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)'
 
 # Install C++ dependenciest 
 RUN brew install boost eigen nlohmann-json msgpack-cxx doctest
