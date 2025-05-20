@@ -30,6 +30,17 @@ jobs:
       - name: list images
         run: docker image ls
 
+      - name: save container
+        run: |
+          docker create --name mgovers-docker-test mgovers-docker-test:0.0.1
+          docker cp mgovers-docker-test:/home/mgovers/target/mgovers-*.jar ./mgovers.jar
+          docker save -o mgovers-docker-test.tar mgovers-docker-test
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: mgovers-docker-test
+
       - name: run tests
         run: |
           docker run --name mgovers-runtime -d -i -t mgovers-docker-test
