@@ -27,7 +27,10 @@ jobs:
   #     - name: checkout
   #       uses: actions/checkout@v4
 
+      - name: list images
+        run: docker image ls
+
       - name: run tests
         run: |
           docker run --name mgovers-runtime -d -i -t mgovers-docker-test
-          docker exec mgovers-runtime sh ./scripts/test.sh
+          docker exec mgovers-runtime sh ./scripts/run.sh
