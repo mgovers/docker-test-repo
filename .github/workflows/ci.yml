@@ -36,10 +36,11 @@ jobs:
           docker cp mgovers-docker-test:/home/mgovers/target/mgovers-*.jar ./mgovers.jar
           docker save -o mgovers-docker-test.tar mgovers-docker-test
 
-      - name: upload artifact
-        uses: actions/upload-artifact@v3
+      - name: Keep wheel files
+        uses: actions/upload-artifact@v4
         with:
-          name: mgovers-docker-test
+          name: mgovers-docker-image
+          path: mgovers-docker-image.tar
 
       - name: run tests
         run: |
