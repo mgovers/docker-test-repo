@@ -24,4 +24,5 @@ jobs:
 
       - name: run tests
         run: |
-          docker exec mgovers-docker-test:0.0.1 ./scripts/test.sh
+          docker run --name mgovers-docker-test -d -i -t mgovers-docker-test:0.0.1
+          docker exec mgovers-docker-test:0.0.1 sh ./scripts/test.sh
