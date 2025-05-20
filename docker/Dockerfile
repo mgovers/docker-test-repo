@@ -13,16 +13,3 @@ RUN echo "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin" >> $GI
 
 # Install C++ dependencies
 RUN brew install boost eigen nlohmann-json msgpack-cxx doctest
-
-FROM pgm_base AS pgm_build
-
-# Install git
-RUN apt-get update
-RUN apt-get install -y git
-
-# Clone the repository
-RUN git clone git@github.com:PowerGridModel/power-grid-model.git
-WORKDIR /power-grid-model
-RUN git status
-
-RUN ./build.sh -p gcc_debug

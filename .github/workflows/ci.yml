@@ -8,6 +8,28 @@ on:
 
 jobs:
   build:
-    run: echo "Build"
-  test:
-    run: echo "Test"
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - build:
+        uses: docker/build-push-action@v6
+        with:
+          push: false
+          context: docker/Dockerfile
+          platforms:
+            - linux/amd64
+            - linux/arm64
+          tags: |
+            mgovers-docker-test:latest
+
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: checkout
+  #       uses: actions/checkout@v4
+
+      - name: run tests
+        run: |
+          docker exec mgovers-docker-test:latest ./scripts/test.sh
