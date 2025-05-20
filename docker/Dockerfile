@@ -16,3 +16,6 @@ RUN brew install \
 ENV CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
 ENV CXX=/home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/g++-14
 ENV CC=/home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/gcc-14
+
+RUN $CXX --version
+RUN $CC --version
