@@ -24,8 +24,8 @@ RUN apt-get install -y \
     build-essential \
     gcovr \
     lcov \
-    gcc \
-    g++ \
+    gcc-12 \
+    g++-12 \
     # clang-18 \
     make \
     cmake \
@@ -38,8 +38,8 @@ RUN apt-get install -y \
     python3-pip
 
 ENV CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
-ENV CXX=g++-13
-ENV CC=gcc-13
+ENV CXX=g++-12
+ENV CC=gcc-12
 # ENV CXX=clang++-18
 # ENV CC=clang-18
 # # only if you want to use one of the clang-tidy presets
