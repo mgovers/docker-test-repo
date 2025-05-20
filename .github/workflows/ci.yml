@@ -32,15 +32,13 @@ jobs:
 
       - name: save container
         run: |
-          docker create --name mgovers-docker-test mgovers-docker-test:0.0.1
-          docker cp mgovers-docker-test:/home/mgovers/target/mgovers-*.jar ./mgovers.jar
-          docker save -o mgovers-docker-test.tar mgovers-docker-test
+          docker save mgovers-docker-test | gzip > mgovers-docker-test.tar.gz
 
       - name: Keep wheel files
         uses: actions/upload-artifact@v4
         with:
-          name: mgovers-docker-image
-          path: mgovers-docker-image.tar
+          name: mgovers-docker-test
+          path: mgovers-docker-test.tar.gz
 
       - name: run tests
         run: |
