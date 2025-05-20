@@ -1,28 +1,28 @@
-FROM ubuntu:24.04 AS pgm_base
+FROM homebrew/brew:latest AS pgm_base
 
-# Install packages
-RUN apt-get update
-RUN apt-get install -y cmake git ninja-build gcc-13 g++-13 clang-18
-RUN ln -s /usr/bin/clang-18 /usr/local/bin/clang
-RUN ln -s /usr/bin/clang++-18 /usr/local/bin/clang++
-RUN ln -s /usr/bin/gcc-13 /usr/local/bin/gcc
-RUN ln -s /usr/bin/g++-13 /usr/local/bin/g++
+# # small test version
+# RUN apt-get update && apt-get install -y curl
 
-# Enable brew
-RUN echo "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin" >> $GITHUB_PATH
+# # Enable brew
+# RUN export NONINTERACTIVE=1
+# RUN ["/bin/bash '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)'"]
 
-# Install C++ dependencies
-RUN brew install boost eigen nlohmann-json msgpack-cxx doctest
+RUN brew install \
+    git \
+    boost eigen nlohmann-json msgpack-cxx doctest \
+    cmake gcc@14 ninja pkg-config \
+    gdb python@3.13
 
-FROM pgm_base AS pgm_build
+ENV CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
+ENV CXX=/home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/g++-14
+ENV CC=/home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/gcc-14
 
-# Install git
-RUN apt-get update
-RUN apt-get install -y git
+RUN $CXX --version
+RUN $CC --version
 
-# Clone the repository
-RUN git clone git@github.com:PowerGridModel/power-grid-model.git
-WORKDIR /power-grid-model
-RUN git status
+USER root
+RUN ln -sf /home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/g++-14 /usr/bin/g++
+RUN ln -sf /home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/gcc-14 /usr/bin/gcc
 
-RUN ./build.sh -p gcc_debug
+RUN g++ --version
+RUN gcc --version
