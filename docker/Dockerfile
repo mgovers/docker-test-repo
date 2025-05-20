@@ -2,14 +2,37 @@ FROM ubuntu:24.04 AS pgm_base
 
 # Install packages
 RUN apt-get update
-RUN apt-get install -y cmake git ninja-build gcc-13 g++-13 clang-18
-RUN ln -s /usr/bin/clang-18 /usr/local/bin/clang
-RUN ln -s /usr/bin/clang++-18 /usr/local/bin/clang++
-RUN ln -s /usr/bin/gcc-13 /usr/local/bin/gcc
-RUN ln -s /usr/bin/g++-13 /usr/local/bin/g++
+RUN apt-get install -y \
+    wget \
+    curl \
+    zip \
+    unzip \
+    tar \
+    git \
+    build-essential \
+    gcovr \
+    lcov \
+    gcc \
+    g++ \
+    clang-18 \
+    make \
+    cmake \
+    gdb \
+    ninja-build \
+    pkg-config \
+    python3.13 \
+    python3.13-dev \
+    python3.13-venv \
+    python3-pip
+
+RUN EXPORT CXX=clang++-18            # or g++-13
+RUN EXPORT CC=clang-18               # gcc-13
+RUN EXPORT CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
+RUN EXPORT LLVM_COV=llvm-cov-18
+RUN EXPORT CLANG_TIDY=clang-tidy-18  # only if you want to use one of the clang-tidy presets
 
 # Enable brew
-RUN echo "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin" >> $GITHUB_PATH
+RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Install C++ dependencies
 RUN brew install boost eigen nlohmann-json msgpack-cxx doctest
