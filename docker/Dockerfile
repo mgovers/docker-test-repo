@@ -1,5 +1,9 @@
 FROM homebrew/brew:latest AS pgm_base
 
+USER root
+# RUN commands
+USER 1001
+
 # Install packages
 RUN apt-get update
 RUN apt-get install -y \
