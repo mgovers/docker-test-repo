@@ -20,5 +20,5 @@ ENV CC=/home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/gcc-14
 RUN $CXX --version
 RUN $CC --version
 
-RUN ln -sf /home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/g++-14 g++
-RUN ln -sf /home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/gcc-14 gcc
+RUN ln -sf /home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/g++-14 /usr/bin/g++
+RUN ln -sf /home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/gcc-14 /usr/bin/gcc
