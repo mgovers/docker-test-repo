@@ -20,9 +20,9 @@ RUN apt-get install -y \
     gdb \
     ninja-build \
     pkg-config \
-    python3.13 \
-    python3.13-dev \
-    python3.13-venv \
+    python3.12 \
+    python3.12-dev \
+    python3.12-venv \
     python3-pip
 
 RUN EXPORT CXX=clang++-18            # or g++-13
@@ -34,5 +34,5 @@ RUN EXPORT CLANG_TIDY=clang-tidy-18  # only if you want to use one of the clang-
 # Enable brew
 RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Install C++ dependencies
+# Install C++ dependenciest 
 RUN brew install boost eigen nlohmann-json msgpack-cxx doctest
