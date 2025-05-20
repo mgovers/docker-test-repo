@@ -13,17 +13,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
-      - build:
-        uses: docker/build-push-action@v6
-        with:
-          push: false
-          context: docker/Dockerfile
-          platforms:
-            - linux/amd64
-            - linux/arm64
-          tags: |
-            mgovers-docker-test:latest
-
+      - name: build
+        run: docker build . --file docker/Dockerfile --tag mgovers-docker-test:0.0.1
+      
   # test:
   #   runs-on: ubuntu-latest
   #   steps:
@@ -32,4 +24,4 @@ jobs:
 
       - name: run tests
         run: |
-          docker exec mgovers-docker-test:latest ./scripts/test.sh
+          docker exec mgovers-docker-test:0.0.1 ./scripts/test.sh
