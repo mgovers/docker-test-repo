@@ -31,7 +31,7 @@ jobs:
       - name: Keep wheel files
         uses: actions/upload-artifact@v4
         with:
-          name: mgovers-docker-test
+          name: mgovers-docker-test.tar.gz
           path: mgovers-docker-test.tar.gz
 
   test:
