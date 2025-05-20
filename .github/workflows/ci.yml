@@ -35,6 +35,7 @@ jobs:
           path: mgovers-docker-test.tar.gz
 
   test:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: checkout
