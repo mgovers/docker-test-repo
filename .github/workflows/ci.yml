@@ -21,24 +21,30 @@ jobs:
           docker tag mgovers-docker-test:0.0.1 mgovers-docker-test:latest
           docker tag mgovers-docker-test:0.0.1 mgovers-docker-test:$(date +%Y%m%d%H%M%S)
 
+      - name: list images
+        run: docker image ls
+
+  #     - name: save container
+  #       run: |
+  #         docker save mgovers-docker-test | gzip > mgovers-docker-test.tar.gz
+
+  #     - name: Keep wheel files
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: mgovers-docker-test
+  #         path: mgovers-docker-test.tar.gz
+
   # test:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: checkout
   #       uses: actions/checkout@v4
 
-      - name: list images
-        run: docker image ls
-
-      - name: save container
-        run: |
-          docker save mgovers-docker-test | gzip > mgovers-docker-test.tar.gz
-
-      - name: Keep wheel files
-        uses: actions/upload-artifact@v4
-        with:
-          name: mgovers-docker-test
-          path: mgovers-docker-test.tar.gz
+  #     - uses: actions/download-artifact@v4
+  #       with:
+  #         name: version
+  #         commit: eb0e7f4
+  #         path: .
 
       - name: run tests
         run: |
