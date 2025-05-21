@@ -7,7 +7,9 @@ RUN brew install \
     gdb python@3.13
 
 ENV CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
+ENV PATH="$(brew --prefix)/opt/python@3.13/libexec/bin:$PATH"
 
 USER root
 RUN ln -sf /home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/g++-14 /usr/bin/g++
 RUN ln -sf /home/linuxbrew/.linuxbrew/Cellar/gcc/14.2.0_1/bin/gcc-14 /usr/bin/gcc
+RUN ln -sf /home/linuxbrew/.linuxbrew/opt/python@3.13/libexec/bin/python3 /usr/bin/python3
