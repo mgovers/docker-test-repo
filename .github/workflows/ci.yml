@@ -80,4 +80,4 @@ jobs:
       - name: run tests
         run: |
           docker run --name mgovers-runtime -d -i -t mgovers-docker-test
-          docker exec mgovers-runtime sh -c "git clone https://github.com/PowerGridModel/power-grid-model.git && cd power-grid-model && git status && python3.13 -m venv .venv && source .venv/bin/activate && which pip && pip install -e .[dev] && pytest"
+          docker exec mgovers-runtime sh -c "git clone https://github.com/PowerGridModel/power-grid-model.git && cd power-grid-model && git status && python3.13 -m pip install -e .[dev] && pytest"
