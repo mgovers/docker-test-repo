@@ -4,7 +4,7 @@ RUN brew install \
     git \
     boost eigen nlohmann-json msgpack-cxx doctest \
     cmake gcc@14 ninja pkg-config gcovr lcov \
-    gdb python@3.13 pipx
+    gdb python@3.13 pipx pytest
 
 ENV CMAKE_PREFIX_PATH=/home/linuxbrew/.linuxbrew
 ENV PATH="$(brew --prefix)/opt/bin:$(brew --prefix)/opt/python@3.13/libexec/bin:$PATH"
