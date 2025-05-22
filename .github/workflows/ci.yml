@@ -80,4 +80,4 @@ jobs:
       - name: run tests
         run: |
           docker run --name mgovers-runtime -d -i -t mgovers-docker-test
-          docker exec mgovers-runtime sh -c "pipx ensurepath && pipx install --include-deps pytest && git clone https://github.com/PowerGridModel/power-grid-model.git && cd power-grid-model && CC=gcc CXX=g++ pipx install --include-deps -e .[dev] && /home/user/.local/pipx/venvs/bin/pytest"
+          docker exec mgovers-runtime sh -c "pipx ensurepath && git clone https://github.com/PowerGridModel/power-grid-model.git && cd power-grid-model && CC=gcc CXX=g++ pipx install --include-deps -e .[dev] && pytest"
