@@ -6,6 +6,10 @@ on:
   workflow_call:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-main
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,7 +38,7 @@ jobs:
           name: mgovers-docker-test.tar.gz
           path: mgovers-docker-test.tar.gz
 
-  test:
+  test-cpp-build:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -55,3 +59,25 @@ jobs:
         run: |
           docker run --name mgovers-runtime -d -i -t mgovers-docker-test
           docker exec mgovers-runtime sh -c "git clone https://github.com/PowerGridModel/power-grid-model.git && cd power-grid-model && git status && sh ./build.sh -p gcc-debug -e -i -t"
+
+  test-python-build:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: mgovers-docker-test.tar.gz
+          path: .
+
+      - name: load container
+        run: |
+          docker load < mgovers-docker-test.tar.gz
+          docker image ls
+
+      - name: run tests
+        run: |
+          docker run --name mgovers-runtime -d -i -t mgovers-docker-test
+          docker exec mgovers-runtime sh -c "pipx ensurepath && git clone https://github.com/PowerGridModel/power-grid-model.git && cd power-grid-model && CC=gcc CXX=g++ pipx install --include-deps -e .[dev] && pytest"
